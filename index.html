@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahmoud Shaabo Programming Workshop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --accent: #9b59b6;
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --dark-text: #f0f0f0;
+            --light-bg: #f8f9fa;
+            --light-card: #ffffff;
+            --light-text: #333333;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode header {
+            background: linear-gradient(135deg, #1a5276, #27ae60);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        /* Event Info Section */
+        .event-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .details-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--light-card);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .dark-mode .details-card {
+            background: var(--dark-card);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .details-card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .info-item i {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .info-text {
+            flex: 1;
+        }
+
+        .info-text h3 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            margin-bottom: 40px;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .images-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .image-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 250px;
+            position: relative;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dark-mode .image-card {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 15px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .image-card:hover .image-overlay {
+            opacity: 1;
+        }
+
+        /* Guest List Section */
+        .guest-section {
+            margin-bottom: 40px;
+        }
+
+        .guest-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .guest-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .guest-card {
+            background: var(--light-card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+            border-left: 4px solid var(--accent);
+        }
+
+        .dark-mode .guest-card {
+            background: var(--dark-card);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .guest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .guest-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* RSVP Button */
+        .rsvp-section {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 40px 0;
+            background: linear-gradient(135deg, var(--accent), #8e44ad);
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dark-mode .rsvp-section {
+            background: linear-gradient(135deg, #8e44ad, #6c3483);
+        }
+
+        .rsvp-btn {
+            background: white;
+            color: var(--accent);
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rsvp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: #f0f0f0;
+        }
+
+        .rsvp-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--light-card);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .dark-mode .theme-toggle {
+            background: var(--dark-card);
+        }
+
+        .theme-toggle i {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--light-card);
+            margin-top: 40px;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode footer {
+            background: var(--dark-card);
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            background: var(--secondary);
+        }
+
+        /* Accessibility Features */
+        .accessibility-tools {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .access-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .access-btn:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .info-item i {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .rsvp-btn {
+                padding: 15px 35px;
+                font-size: 1.2rem;
+            }
+            
+            .accessibility-tools {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .access-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Accessibility Tools -->
+    <div class="accessibility-tools">
+        <button class="access-btn" id="fontIncrease" title="Increase Font Size">
+            <i class="fas fa-text-height"></i>
+        </button>
+        <button class="access-btn" id="fontDecrease" title="Decrease Font Size">
+            <i class="fas fa-text-width"></i>
+        </button>
+        <button class="access-btn" id="highContrast" title="High Contrast Mode">
+            <i class="fas fa-adjust"></i>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Mahmoud Shaabo Programming Workshop</h1>
+            <p class="subtitle">At Doncaster College - A Journey into Technology and Creativity</p>
+        </header>
+
+        <!-- Event Details Section -->
+        <section class="event-info">
+            <div class="details-card">
+                <h2>Event Details</h2>
+                
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="info-text">
+                        <h3>Date & Time</h3>
+                        <p>Sunday, July 20, 2025</p>
+                        <p>10:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="info-text">
+                        <h3>Location</h3>
+                        <p>Doncaster College Library</p>
+                        <p>Doncaster DN1 3EX, United Kingdom</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-user-tie"></i>
+                    <div class="info-text">
+                        <h3>Lead Instructor</h3>
+                        <p>Mahmoud Shaabo - Web Development Expert</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <div class="info-text">
+                        <h3>Main Topics</h3>
+                        <p>• Programming Fundamentals for Beginners</p>
+                        <p>• Modern Web Application Development</p>
+                        <p>• Introduction to Artificial Intelligence</p>
+                        <p>• The Future of Technology and Careers</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="details-card">
+                <h2>Why You Should Attend?</h2>
+                
+                <div class="info-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="info-text">
+                        <h3>Hands-on Learning</h3>
+                        <p>Practical workshop with live examples</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-network-wired"></i>
+                    <div class="info-text">
+                        <h3>Networking</h3>
+                        <p>Connect with professionals and experts</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <div class="info-text">
+                        <h3>Inspiration</h3>
+                        <p>Learn from industry pioneers</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-certificate"></i>
+                    <div class="info-text">
+                        <h3>Participation Certificate</h3>
+                        <p>All attendees receive a certificate</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-coffee"></i>
+                    <div class="info-text">
+                        <h3>Refreshments</h3>
+                        <p>Complimentary coffee, tea, and snacks</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery">
+            <h2><i class="fas fa-camera"></i> Event Gallery</h2>
+            
+            <div class="images-container">
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1470&auto=format&fit=crop" alt="Doncaster College">
+                    <div class="image-overlay">
+                        <h3>Doncaster College</h3>
+                        <p>Workshop Venue</p>
+                    </div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1469&auto=format&fit=crop" alt="Programming Environment">
+                    <div class="image-overlay">
+                        <h3>Programming Environment</h3>
+                        <p>Modern equipment ready for use</p>
+                    </div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1470&auto=format&fit=crop" alt="Coding Workshop">
+                    <div class="image-overlay">
+                        <h3>Practical Workshop</h3>
+                        <p>Hands-on learning with projects</p>
+                    </div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1470&auto=format&fit=crop" alt="College Library">
+                    <div class="image-overlay">
+                        <h3>College Library</h3>
+                        <p>Comfortable and resource-rich space</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guest List Section -->
+        <section class="guest-section">
+            <h2><i class="fas fa-users"></i> Guest List</h2>
+            
+            <div class="guest-list">
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Monir Shaabo</h3>
+                    <p>Guest of Honor</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Mustafa Shaabo</h3>
+                    <p>Guest of Honor</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Asama Albahah</h3>
+                    <p>Guest of Honor</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Mohmad Abd AlWahab</h3>
+                    <p>Guest of Honor</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Mohammed Ali</h3>
+                    <p>Participant</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Khalid Bakour</h3>
+                    <p>Participant</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Mustafa Ismail</p>
+                    <p>Participant</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Moasab Al-Dubais</h3>
+                    <p>Participant</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Nasser Nasro</h3>
+                    <p>Participant</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Sara Al-Dalati</h3>
+                    <p>Participant</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Hamza Al-Qaisi</h3>
+                    <p>Participant</p>
+                </div>
+                
+                <div class="guest-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Mona Sharif</h3>
+                    <p>Participant</p>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 20px; font-size: 1.1rem;">
+                <i class="fas fa-info-circle"></i> Plus many other guests and participants
+            </p>
+        </section>
+
+        <!-- RSVP Section -->
+        <section class="rsvp-section">
+            <h2 style="color: white; margin-bottom: 30px; font-size: 2.2rem;">Will you join us on this tech journey?</h2>
+            <button class="rsvp-btn" id="rsvpButton">
+                <i class="fas fa-check-circle"></i> Confirm Attendance
+            </button>
+            <p style="color: rgba(255, 255, 255, 0.9); margin-top: 20px; font-size: 1.1rem;">
+                Seats are limited - Register now!
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <h3>Mahmoud Shaabo Programming Workshop</h3>
+            <p>At Doncaster College | July 20, 2025</p>
+            
+            <div class="social-icons">
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <p>© 2025 All Rights Reserved | Designed with ♥ for Everyone</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+            updateThemeIcon();
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark-mode' : '');
+            updateThemeIcon();
+        });
+        
+        function updateThemeIcon() {
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+        
+        // Font Size Adjustment for Accessibility
+        const html = document.documentElement;
+        const fontIncrease = document.getElementById('fontIncrease');
+        const fontDecrease = document.getElementById('fontDecrease');
+        
+        fontIncrease.addEventListener('click', () => {
+            const currentSize = parseFloat(getComputedStyle(html).fontSize);
+            html.style.fontSize = (currentSize + 1) + 'px';
+        });
+        
+        fontDecrease.addEventListener('click', () => {
+            const currentSize = parseFloat(getComputedStyle(html).fontSize);
+            if (currentSize > 14) {
+                html.style.fontSize = (currentSize - 1) + 'px';
+            }
+        });
+        
+        // High Contrast Mode
+        const highContrast = document.getElementById('highContrast');
+        highContrast.addEventListener('click', () => {
+            body.classList.toggle('high-contrast');
+        });
+        
+        // RSVP Button Functionality
+        const rsvpButton = document.getElementById('rsvpButton');
+        rsvpButton.addEventListener('click', () => {
+            rsvpButton.innerHTML = '<i class="fas fa-check-circle"></i> Attendance Confirmed!';
+            rsvpButton.style.background = '#2ecc71';
+            rsvpButton.style.color = 'white';
+            
+            // Show a confirmation message
+            setTimeout(() => {
+                alert('Thank you for confirming your attendance! You have been successfully registered for the workshop. A confirmation email will be sent to you.');
+            }, 300);
+        });
+    </script>
+</body>
+</html>
